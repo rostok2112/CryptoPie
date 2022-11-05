@@ -3,15 +3,22 @@ import pkgutil
 import encodings
 
 parser = argparse.ArgumentParser(
-    prog = 'CesarEncryptor',
+    prog = 'python encrypt.py',
     description='Simple CLI Cesar Encryptor/Decryptor'
 )
 
 parser.add_argument(
-    "pathes",
+    "input",
     nargs='+',
     type=str,
-    help="A path/pathes to a file/files/directory/directories"
+    help="An input text for encrypt"
+)
+parser.add_argument(
+    "-p",
+    "--pathes",
+    nargs='*',
+    type=str,
+    help="A path/pathes to a input file/files/directory/directories"
 )
 
 parser.add_argument(
@@ -28,6 +35,12 @@ parser.add_argument(
     "--recursively", 
     action="store_true",
     help="Recursively encrypt/decrypt everuthing in input path. Doesnt do anything if file on input"
+)
+parser.add_argument(
+    "-v",
+    "--verbose", 
+    action="store_true",
+    help="Print results into stdout"
 )
 parser.add_argument(
     "-s",
