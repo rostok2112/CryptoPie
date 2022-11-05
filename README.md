@@ -4,9 +4,9 @@ Cesar cipher encryptor  with CLI interface
 
 ## Requirements
 
-+ Python3
-+ Optionally:
-        + PipEnv
+- Python3
+- Optionally:
+    - PipEnv
 
 ## Usage
 
