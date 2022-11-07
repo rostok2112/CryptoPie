@@ -1,6 +1,5 @@
 from typing import List, Tuple
 
-
 def recognise_letter_borders(
     letter: str, 
     borders: List[Tuple[str, str]] = [('a', 'z'), ('A', 'Z')]
@@ -38,7 +37,7 @@ def shift_letter(
     if shift_edges:
         left_edge = ord(shift_edges[0])
         right_edge = ord(shift_edges[1])
-        shifted_letter_code = shifted_letter_code + shift
+        shifted_letter_code += shifted_letter_code
 
         if shifted_letter_code > right_edge:
             shifted_letter_code = shifted_letter_code - right_edge + left_edge - 1

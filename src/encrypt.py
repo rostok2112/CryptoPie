@@ -7,6 +7,7 @@ dest_path = Path(args.destination)
 
 def output_to_stdout(output: str, header: str):
     print(f'{header}:\n"""\n{output}\n"""\n') 
+
 def output_to_file(output: str, name_of_file: str):
     with (dest_path / f"output_{datetime.datetime.now().timestamp()}_{name_of_file}").open(mode='w', encoding=args.encoding) as file_output:
         file_output.write(output)
@@ -25,6 +26,7 @@ def encrypt_text(text: str) -> str:
                 ) for letter in text
             ])
     )
+
 def encrypt_file(path: Path):
     with path.open(encoding=args.encoding) as file_input:
         encrypted_text = encrypt_text(file_input.read())
@@ -34,7 +36,7 @@ def encrypt_file(path: Path):
 def main():
     dest_path.mkdir(parents=True, exist_ok=True)
 
-    for i, input_ in enumerate(args.input): 
+    for i, input_ in enumerate(args.input):
         encrypted_text = encrypt_text(input_)
         output_to_file(encrypted_text, f"Input{i}")
         if args.verbose:

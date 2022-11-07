@@ -9,8 +9,10 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument(
     "input",
-    nargs='+',
+    nargs='*',
     type=str,
+    action="extend",
+    default=[],
     help="An input text for encrypt"
 )
 parser.add_argument(
@@ -18,6 +20,8 @@ parser.add_argument(
     "--pathes",
     nargs='*',
     type=str,
+    action="extend",
+    default=[],
     help="A path/pathes to a input file/files/directory/directories"
 )
 
@@ -52,9 +56,10 @@ parser.add_argument(
 parser.add_argument(
     "-b",
     "--borders", 
-    default=("a-z", "A-Z"),
     nargs='*',
     type=str,
+    action="extend",
+    default=["a-z", "A-Z"],
     help="Alphabet/alphabets borders in format: a-z A-Z а-я А-Я"
 )
 
@@ -71,3 +76,6 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+if not len(args.input) and not len(args.pathes):
+   parser.error("At least one of input texts or input pathes (--pathes) required")
