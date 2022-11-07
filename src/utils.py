@@ -37,7 +37,7 @@ def shift_letter(
     if shift_edges:
         left_edge = ord(shift_edges[0])
         right_edge = ord(shift_edges[1])
-        shifted_letter_code += shifted_letter_code
+        shifted_letter_code += shift
 
         if shifted_letter_code > right_edge:
             shifted_letter_code = shifted_letter_code - right_edge + left_edge - 1
