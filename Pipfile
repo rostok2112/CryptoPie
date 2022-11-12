@@ -11,4 +11,4 @@ name = "pypi"
 python_version = "3.10"
 
 [scripts]
-encrypt = "python src/encrypt.py"
+encrypt = "python src/crypto_pie.py"
