@@ -47,7 +47,7 @@ Use by:
 
 ```bash
 cd src/
-python encrypt.py [options] <input>
+python crypto_pie.py [options] <input>
 ```
 
 Or if pipenv installed:
