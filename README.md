@@ -24,8 +24,8 @@ positional arguments:
         -h, --help          show help message
         -g, --generate_key  Generate random key
     decrypt             Decrypt options
-    options:
-      -h, --help  show help message
+      options:
+        -h, --help  show help message
   input                 An input text for encrypt
 
 options:
