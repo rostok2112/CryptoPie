@@ -3,9 +3,14 @@ import pkgutil
 import encodings
 
 parser = argparse.ArgumentParser(
-    prog = 'python encrypt.py',
-    description='Simple CLI Cesar Encryptor/Decryptor'
+    prog = 'python crypto_pie.py',
+    description='Encryptor/Decryptor with CLI interface'
 )
+
+subparsers = parser.add_subparsers(help='List of purposes handlers', dest='subparser')
+
+encrypt_parser = subparsers.add_parser('encrypt',  help='Encrypt options')
+decrypt_parser = subparsers.add_parser('decrypt',  help='Decrypt options')
 
 parser.add_argument(
     "input",
@@ -47,11 +52,9 @@ parser.add_argument(
     help="Print results into stdout"
 )
 parser.add_argument(
-    "-s",
-    "--shift", 
-    default=2, 
-    type=int, 
-    help="The value by which the letters will be shifted relative to the alphabet"
+    "-k",
+    "--key",
+    help="The value by which an input will be encrypted/decrypted"
 )
 parser.add_argument(
     "-b",
@@ -75,7 +78,34 @@ parser.add_argument(
     help="Encoding of texts of input and output files"
 )
 
+encrypt_parser.add_argument(
+    "-g",
+    "--generate_key", 
+    action="store_true",
+    help="Generate random key"
+)
+encrypt_parser.add_argument(
+    "input",
+    nargs='*',
+    type=str,
+    action="extend",
+    default=[],
+    help="An input text for encrypt"
+)
+decrypt_parser.add_argument(
+    "input",
+    nargs='*',
+    type=str,
+    action="extend",
+    default=[],
+    help="An input text for encrypt"
+)
+
+
 args = parser.parse_args()
 
 if not len(args.input) and not len(args.pathes):
    parser.error("At least one of input texts or input pathes (--pathes) required")
+
+if bool(args.key) == bool(args.generate_key): # if not or  specified at the same time 
+   parser.error("Specify key by -k (--key key) OR set -g (--generate_key) (not at the same time)")

@@ -45,3 +45,28 @@ def shift_letter(
             shifted_letter_code = shifted_letter_code - left_edge + right_edge + 1
 
     return chr(shifted_letter_code)
+
+def shift_string(string: str, shift: int, borders: list[str] = ['a-z', 'A-Z']) -> str:
+    """
+    Shifting a given string by value of shift relative to the edges passed in shift edges
+    ----------
+    Parameters:
+    + string - string to be shifted
+    + shift - value by which letter will be shifted
+    + borders - list with  edges pairs of intervals that may contain all letters of input string
+        Format : ['a-z', 'A-Z']
+    """ 
+
+    return (
+        ""
+            .join([
+                shift_letter(
+                    letter, 
+                    shift, 
+                    recognise_letter_borders(
+                        letter, 
+                        [border.split('-') for border in borders]
+                    )
+                ) for letter in string
+            ])
+    )
