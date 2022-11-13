@@ -8,6 +8,34 @@ Encryptor and decryptor with implemented collection of encryption algorithms and
 - Optionally:
   - PipEnv
 
+## Dependencies installation
+
+If you have pipenv you can install or update dependencies by:
+
+```bash
+pipenv sync
+```
+
+Else:
+
+```bash
+pip install -r requirements.txt
+```
+
+Install new dependencies  if you have pipenv:
+
+```bash
+pipenv install <name_of_package>
+pipenv requirements > requirements.txt
+```
+
+Else:
+
+```bash
+pip install <name_of_package>
+pip freeze > requirements.txt
+```
+
 ## Usage
 
 ```text
