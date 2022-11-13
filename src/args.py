@@ -6,15 +6,6 @@ parser = argparse.ArgumentParser(
     prog = "python crypto_pie.py",
     description="Encryptor/Decryptor with CLI interface",
 )
-parser.add_argument(
-    "method",
-    choices=[
-        "cesar", 
-        "replacement",
-    ],
-    type=str,
-    help="A cryptographic algorithm for encryption/decryption",
-)
 
 subparsers = parser.add_subparsers(help="List of purposes handlers", dest="purpose",)
 
@@ -35,6 +26,19 @@ encodings_set.difference_update(false_positives)
 # + End of getting set of encodings
 
 general_args = [
+    {
+        "kwargs" : {
+            "choices": [
+                "cesar", 
+                "replacement",
+            ],
+            "type" : str,
+            "help" : "A cryptographic algorithm for encryption/decryption",
+        },
+        "args" : [
+            "method",
+        ]
+    },
     {
         "kwargs" : {
             "nargs" : "*",

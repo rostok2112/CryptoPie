@@ -39,9 +39,9 @@ pip freeze > requirements.txt
 ## Usage
 
 ```text
-usage: python crypto_pie.py [-h] [-p [PATHES ...]] [-d DESTINATION] [-r] [-k KEY] [-b [BORDERS ...]]
+usage: python crypto_pie.py [-h] {encrypt,decrypt} [-p [PATHES ...]] [-d DESTINATION] [-r] [-k KEY] [-b [BORDERS ...]]
                          [-e {utf-8, ascii, ...}]
-                         {encrypt,decrypt} ... input [input ...]
+                         {cesar,replacement} ... input [input ...]
 
 Encryptor/Decryptor with CLI interface
 
