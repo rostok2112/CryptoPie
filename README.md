@@ -19,8 +19,14 @@ Encryptor/Decryptor with CLI interface
 
 positional arguments:
   {cesar,replacement}   A cryptographic algorythm for encryption/decryption
-    cesar
-      
+    cesar 
+      key format:
+        integer_num,  -inf <= integer_num <= inf
+        May be any positive or negative integer
+    replacement
+      key format:
+        value_to_be_replaced1:value_to_replace1,value_to_be_replaced2:value_to_replace1,...
+        Sequence of pairs of values to be replace and values to replace and values to be replaced by this value
   {encrypt,decrypt}     List of purposes handlers
     encrypt             Encrypt options
       options:
