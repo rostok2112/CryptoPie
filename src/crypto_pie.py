@@ -18,8 +18,8 @@ def process_file(path: Path):
 
 dest_path = Path(args.destination)
 
-current_method_module = import_module(f"crypto_methods.{args.method}") # get corresponding module to selected algorythm
-current_handler = getattr(current_method_module, f"{args.method}_{args.purpose}", None) # get corresponding handling function to selected usage purpose and algorythm
+current_method_module = import_module(f"crypto_methods.{args.method}") # get corresponding module to selected algorithm
+current_handler = getattr(current_method_module, f"{args.method}_{args.purpose}", None) # get corresponding handling function to selected usage purpose and algorithm
 current_key = getattr(current_method_module, f"{args.method}_generate_key", None)(args.borders) if getattr(args, "generate_key", False) else args.key # get key from corresponding to selected method keygen function or get specified key 
 
 def main():

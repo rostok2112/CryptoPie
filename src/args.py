@@ -10,7 +10,7 @@ parser.add_argument(
     "method",
     choices=["cesar", "replacement"],
     type=str,
-    help="A cryptographic algorythm for encryption/decryption"
+    help="A cryptographic algorithm for encryption/decryption"
 )
 
 subparsers = parser.add_subparsers(help='List of purposes handlers', dest='purpose')
