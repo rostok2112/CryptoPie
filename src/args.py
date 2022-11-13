@@ -8,7 +8,10 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument(
     "method",
-    choices=["cesar", "replacement"],
+    choices=[
+        "cesar", 
+        "replacement",
+    ],
     type=str,
     help="A cryptographic algorithm for encryption/decryption"
 )
@@ -102,23 +105,23 @@ decrypt_parser.add_argument(
 
 general_args = [
     {
-        'kwargs' : {
+        "kwargs" : {
             "nargs" : "*",
             "type" : str,
             "action" : "extend",
             "default" : [],
-            "help" : "An input text for encrypt",
+            "help" : "An input text for processing",
 
         },
-        'args' : [
+        "args" : [
             "input",
         ]
     },
     {
-        'kwargs' : {
-            'help' : "The value by which an input will be encrypted/decrypted",
+        "kwargs" : {
+            "help" : "The value by which an input will be encrypted/decrypted",
         },
-        'args' : [
+        "args" : [
             "-k",
             "--key",
         ]
@@ -126,8 +129,8 @@ general_args = [
 ]
 
 for arg in general_args:
-    encrypt_parser.add_argument(*arg['args'], **arg['kwargs'])
-    decrypt_parser.add_argument(*arg['args'], **arg['kwargs'])
+    encrypt_parser.add_argument(*arg["args"], **arg["kwargs"])
+    decrypt_parser.add_argument(*arg["args"], **arg["kwargs"])
 
 args = parser.parse_args()
 
