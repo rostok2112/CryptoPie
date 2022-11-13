@@ -6,8 +6,14 @@ parser = argparse.ArgumentParser(
     prog = 'python crypto_pie.py',
     description='Encryptor/Decryptor with CLI interface'
 )
+parser.add_argument(
+    "method",
+    choices=["cesar", "replacement"],
+    type=str,
+    help="A cryptographic algorythm for encryption/decryption"
+)
 
-subparsers = parser.add_subparsers(help='List of purposes handlers', dest='subparser')
+subparsers = parser.add_subparsers(help='List of purposes handlers', dest='purpose')
 
 encrypt_parser = subparsers.add_parser('encrypt',  help='Encrypt options')
 decrypt_parser = subparsers.add_parser('decrypt',  help='Decrypt options')
@@ -20,6 +26,11 @@ parser.add_argument(
     default=[],
     help="An input text for encrypt"
 )
+# parser.add_argument(
+#     "-k",
+#     "--key",
+#     help="The value by which an input will be encrypted/decrypted"
+# )
 parser.add_argument(
     "-p",
     "--pathes",
@@ -52,11 +63,6 @@ parser.add_argument(
     help="Print results into stdout"
 )
 parser.add_argument(
-    "-k",
-    "--key",
-    help="The value by which an input will be encrypted/decrypted"
-)
-parser.add_argument(
     "-b",
     "--borders", 
     nargs='*',
@@ -84,6 +90,7 @@ encrypt_parser.add_argument(
     action="store_true",
     help="Generate random key"
 )
+
 encrypt_parser.add_argument(
     "input",
     nargs='*',
@@ -92,6 +99,7 @@ encrypt_parser.add_argument(
     default=[],
     help="An input text for encrypt"
 )
+
 decrypt_parser.add_argument(
     "input",
     nargs='*',
@@ -102,10 +110,28 @@ decrypt_parser.add_argument(
 )
 
 
+general_args = [
+    {
+        'kwargs' : {
+            'help' : "The value by which an input will be encrypted/decrypted"
+        },
+        'args' : [
+            "-k",
+            "--key"
+        ]
+    },
+]
+for arg in general_args:
+    encrypt_parser.add_argument(*arg['args'], **arg['kwargs'])
+    decrypt_parser.add_argument(*arg['args'], **arg['kwargs'])
+
 args = parser.parse_args()
 
 if not len(args.input) and not len(args.pathes):
    parser.error("At least one of input texts or input pathes (--pathes) required")
 
-if bool(args.key) == bool(args.generate_key): # if not or  specified at the same time 
-   parser.error("Specify key by -k (--key key) OR set -g (--generate_key) (not at the same time)")
+if args.purpose == "encrypt" and bool(args.key) == bool(args.generate_key): # if not or specified at the same time 
+   parser.error("Specify key by -k (--key) key OR set -g (--generate_key) (not at the same time)")
+
+if not args.key and args.purpose == "decrypt":
+    parser.error("Specify key by -k (--key) key for decryption")

@@ -1,9 +1,7 @@
-from typing import List, Tuple
-
 def recognise_letter_borders(
     letter: str, 
-    borders: List[Tuple[str, str]] = [('a', 'z'), ('A', 'Z')]
-) -> Tuple[str, str]:
+    borders: list[tuple[str, str]] = [('a', 'z'), ('A', 'Z')]
+) -> tuple[str, str]:
     """
     Recognising tuple with edges of intervals that may contain an input letter
     ----------
@@ -20,7 +18,7 @@ def recognise_letter_borders(
 def shift_letter(
     letter: str, 
     shift: int = 2, 
-    shift_edges: Tuple[str, str] | None = ('a', 'z')
+    shift_edges: tuple[str, str] | None = ('a', 'z')
 ) -> str:
     """
     Shifting letter by value of shift relative to the edges passed in shift edges
@@ -70,3 +68,26 @@ def shift_string(string: str, shift: int, borders: list[str] = ['a-z', 'A-Z']) -
                 ) for letter in string
             ])
     )
+
+def replace_by_dict(string: str, dict_: dict[str, str]):
+    """
+    Replacing everything is given in keys to values of dictionary dict_
+    ----------
+    Parameters:
+    + string - string whose letters will be replaced 
+    + dict_ - dictionary for each key of which in the input string will be replaced by value by this key
+    """ 
+    replaced_chars = []
+    for char in string:
+       replaced_chars.append(dict_.get(char, char))
+    return "".join(replaced_chars)
+
+def revert_dict(dict_ : dict[str, str]):
+    """
+    Swaps keys and values of dictionary dict_  
+    ----------
+    Parameters:
+    + dict_ - dictionary for each keys and values will be swapped
+    """ 
+
+    return dict(map(reversed, dict_.items()))

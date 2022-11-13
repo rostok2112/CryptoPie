@@ -18,6 +18,9 @@ usage: python crypto_pie.py [-h] [-p [PATHES ...]] [-d DESTINATION] [-r] [-k KEY
 Encryptor/Decryptor with CLI interface
 
 positional arguments:
+  {cesar,replacement}   A cryptographic algorythm for encryption/decryption
+    cesar
+      
   {encrypt,decrypt}     List of purposes handlers
     encrypt             Encrypt options
       options:
