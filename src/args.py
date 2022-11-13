@@ -26,11 +26,7 @@ parser.add_argument(
     default=[],
     help="An input text for encrypt"
 )
-# parser.add_argument(
-#     "-k",
-#     "--key",
-#     help="The value by which an input will be encrypted/decrypted"
-# )
+
 parser.add_argument(
     "-p",
     "--pathes",
@@ -92,12 +88,7 @@ encrypt_parser.add_argument(
 )
 
 encrypt_parser.add_argument(
-    "input",
-    nargs='*',
-    type=str,
-    action="extend",
-    default=[],
-    help="An input text for encrypt"
+    
 )
 
 decrypt_parser.add_argument(
@@ -109,18 +100,31 @@ decrypt_parser.add_argument(
     help="An input text for encrypt"
 )
 
-
 general_args = [
     {
         'kwargs' : {
-            'help' : "The value by which an input will be encrypted/decrypted"
+            "nargs" : "*",
+            "type" : str,
+            "action" : "extend",
+            "default" : [],
+            "help" : "An input text for encrypt",
+
+        },
+        'args' : [
+            "input",
+        ]
+    },
+    {
+        'kwargs' : {
+            'help' : "The value by which an input will be encrypted/decrypted",
         },
         'args' : [
             "-k",
-            "--key"
+            "--key",
         ]
     },
 ]
+
 for arg in general_args:
     encrypt_parser.add_argument(*arg['args'], **arg['kwargs'])
     decrypt_parser.add_argument(*arg['args'], **arg['kwargs'])
