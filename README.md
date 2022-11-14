@@ -41,7 +41,7 @@ pip freeze > requirements.txt
 ```text
 usage: python crypto_pie.py [-h] {encrypt,decrypt} [-p [PATHES ...]] [-d DESTINATION] [-r] [-k KEY] [-b [BORDERS ...]]
                          [-e {utf-8, ascii, ...}]
-                         {cesar,replacement,stream} ... input [input ...]
+                         {cesar,replacement,additive_stream} ... input [input ...]
 
 Encryptor/Decryptor with CLI interface
 
@@ -62,7 +62,6 @@ positional arguments:
                               Alphabet/alphabets borders in format: a-z A-Z а-я А-Я
         -e {utf-8, ascii, ...}, --encoding {utf-8, ascii, ...}
                               Encoding of texts of input and output files
-        
     decrypt             Decrypt options
       options:
         -h, --help            show help message
