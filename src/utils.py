@@ -56,7 +56,7 @@ def shift_string(string: str, shift: int, borders: list[str] = ['a-z', 'A-Z']) -
     """ 
 
     return (
-        ""
+        ''
             .join([
                 shift_letter(
                     letter, 
@@ -71,16 +71,17 @@ def shift_string(string: str, shift: int, borders: list[str] = ['a-z', 'A-Z']) -
 
 def replace_by_dict(string: str, dict_: dict[str, str]):
     """
-    Replacing everything is given in keys to values of dictionary dict_
+    Replacing everything is given in stringto values of dictionary dict_ by keys 
     ----------
     Parameters:
     + string - string whose letters will be replaced 
     + dict_ - dictionary for each key of which in the input string will be replaced by value by this key
     """ 
+
     replaced_chars = []
     for char in string:
        replaced_chars.append(dict_.get(char, char))
-    return "".join(replaced_chars)
+    return ''.join(replaced_chars)
 
 def revert_dict(dict_ : dict[str, str]):
     """
@@ -91,3 +92,18 @@ def revert_dict(dict_ : dict[str, str]):
     """ 
 
     return dict(map(reversed, dict_.items()))
+
+def replace_by_list(string: str, list_: list[str]):
+    """
+    Replacing everything is given in string to values of list list_ by corresponding index of character in list to character in string
+    ----------
+    Parameters:
+    + string - string whose letters will be replaced 
+    + list_ - list for each character of which the corresponding character of input string by index will be replaced
+    """ 
+
+    replaced_chars = []
+    list_index_dict = dict(enumerate(list_))
+    for i, char in enumerate(string):
+       replaced_chars.append(list_index_dict.get(i, char))
+    return ''.join(replaced_chars)

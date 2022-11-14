@@ -1,8 +1,7 @@
 import random as rnd
 from utils import replace_by_dict, revert_dict
 
-
-def replacement_encrypt(text: str, key: str, *args) -> str: # dict[str, str]
+def substitution_encrypt(text: str, key: str, *args) -> str:
     return (
         replace_by_dict(
             text,
@@ -10,7 +9,7 @@ def replacement_encrypt(text: str, key: str, *args) -> str: # dict[str, str]
         ) 
     )
 
-def replacement_decrypt(text: str, key: str, *args) -> str: # dict[str, str]
+def substitution_decrypt(text: str, key: str, *args) -> str:
     return (
         replace_by_dict(
             text, 
@@ -18,7 +17,7 @@ def replacement_decrypt(text: str, key: str, *args) -> str: # dict[str, str]
         ) 
     )
 
-def replacement_generate_key(borders: list[str] = ['a-z', 'A-Z']):
+def substitution_generate_key(borders: list[str] = ['a-z', 'A-Z'], *args) -> str:
     if len(borders):
         replacement_map = {}
         for edges in (border.split('-') for border in borders):
@@ -28,4 +27,4 @@ def replacement_generate_key(borders: list[str] = ['a-z', 'A-Z']):
                 chr(letter) : chr(random_replacements[letter - ord(edges[0])])
                     for letter in interval_range
             }
-        return ",".join([f"{key}:{value}" for key, value in replacement_map.items()])
+        return ','.join([f"{key}:{value}" for key, value in replacement_map.items()])

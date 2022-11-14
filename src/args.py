@@ -31,6 +31,7 @@ general_args = [
             "choices": [
                 "cesar", 
                 "replacement",
+                "additive_stream",
             ],
             "type" : str,
             "help" : "A cryptographic algorithm for encryption/decryption",
@@ -69,7 +70,7 @@ general_args = [
     {
         "kwargs" : {
             "type" : str,
-            "default" : "outout",
+            "default" : "output",
             "help" : "Destination path",
         },
         "args" : [

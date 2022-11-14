@@ -7,7 +7,7 @@ def cesar_encrypt(text: str, key: int, borders: list[str] = ['a-z', 'A-Z'], *arg
 def cesar_decrypt(text: str, key: int, borders: list[str] = ['a-z', 'A-Z'], *args) -> str:
     return shift_string(text, -int(key), borders)
 
-def cesar_generate_key(borders: list[str] = ['a-z', 'A-Z']) -> int:
+def cesar_generate_key(borders: list[str] = ['a-z', 'A-Z'], *args) -> int:
     max_key = max(
         map(
             lambda edges: ord(edges[1]) - ord(edges[0]),
