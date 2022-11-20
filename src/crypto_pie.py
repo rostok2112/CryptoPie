@@ -1,7 +1,7 @@
 import datetime
 from importlib import import_module
 from pathlib import Path
-from args import args
+from arguments import args
 
 def output_to_stdout(output: str, header: str):
     print(f'{header}:\n"""\n{output}\n"""\n') 

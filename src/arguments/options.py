@@ -1,23 +1,5 @@
-import argparse
 import pkgutil
 import encodings
-
-parser = argparse.ArgumentParser(
-    prog = "python crypto_pie.py",
-    description="Encryptor/Decryptor with CLI interface",
-)
-
-subparsers = parser.add_subparsers(help="List of purposes handlers", dest="purpose",)
-
-encrypt_parser = subparsers.add_parser("encrypt",  help="Encrypt options")
-decrypt_parser = subparsers.add_parser("decrypt",  help="Decrypt options")
-
-encrypt_parser.add_argument(
-    "-g",
-    "--generate_key", 
-    action="store_true",
-    help="Generate random key",
-)
 
 # + Start of getting set of encodings
 false_positives = set(["aliases"])
@@ -25,35 +7,20 @@ encodings_set = set(name for imp, name, ispkg in pkgutil.iter_modules(encodings.
 encodings_set.difference_update(false_positives)
 # + End of getting set of encodings
 
-general_args = [
-    {
-        "kwargs" : {
-            "choices": [
-                "cesar", 
-                "replacement",
-                "additive_stream",
-            ],
-            "type" : str,
-            "help" : "A cryptographic algorithm for encryption/decryption",
-        },
-        "args" : [
-            "method",
-        ]
-    },
-    {
+general_options = {
+    "input" : {
         "kwargs" : {
             "nargs" : "*",
             "type" : str,
             "action" : "extend",
             "default" : [],
             "help" : "An input text for processing",
-
         },
         "args" : [
             "input",
-        ]
+        ],
     },
-    {
+    "pathes" : {
         "kwargs" : {
             "nargs" : "*",
             "type" : str,
@@ -65,9 +32,9 @@ general_args = [
         "args" : [
             "-p",
             "--pathes",
-        ]
+        ],
     },
-    {
+    "destination" : {
         "kwargs" : {
             "type" : str,
             "default" : "output",
@@ -77,9 +44,9 @@ general_args = [
             "-d",
             "--destination",
             "--dest",
-        ]
+        ],
     },
-    {
+    "recursively" : {
         "kwargs" : {
             "action" : "store_true",
             "help" : "Recursively encrypt/decrypt everuthing in input path. Doesnt do anything if file on input",
@@ -88,9 +55,9 @@ general_args = [
         "args" : [
             "-r",
             "--recursively",
-        ]
+        ],
     },
-    {
+    "verbose" : {
         "kwargs" : {
             "action" : "store_true",
             "help" : "Print results into stdout",
@@ -99,9 +66,9 @@ general_args = [
         "args" : [
             "-v",
             "--verbose",
-        ]
+        ],
     },
-    {
+    "borders" : {
         "kwargs" : {
             "nargs" : '*',
             "action" : "extend",
@@ -112,9 +79,9 @@ general_args = [
         "args" : [
             "-b",
             "--borders",
-        ]
+        ],
     },
-    {
+    "encoding" : {
         "kwargs" : {
             "choices" : list(encodings_set),
             "default" : "UTF-8",
@@ -124,30 +91,26 @@ general_args = [
         "args" : [
             "-e",
             "--encoding",
-        ]
+        ],
     },
-    {
+    "key" : {
         "kwargs" : {
             "help" : "The value by which an input will be encrypted/decrypted",
         },
         "args" : [
             "-k",
             "--key",
-        ]
+        ],
     },
-]
+    "generate_key" : {
+         "kwargs" : {
+            "help" : "Generate random key",
+            "action" : "store_true",
 
-for arg in general_args:
-    encrypt_parser.add_argument(*arg["args"], **arg["kwargs"])
-    decrypt_parser.add_argument(*arg["args"], **arg["kwargs"])
-
-args = parser.parse_args()
-
-if not len(args.input) and not len(args.pathes):
-   parser.error("At least one of input texts or input pathes (--pathes) required")
-
-if args.purpose == "encrypt" and bool(args.key) == bool(args.generate_key): # if not or specified at the same time 
-   parser.error("Specify key by -k (--key) key OR set -g (--generate_key) (not at the same time)")
-
-if not args.key and args.purpose == "decrypt":
-    parser.error("Specify key by -k (--key) key for decryption")
+        },
+        "args" : [
+            "-g",
+            "--generate_key",
+        ],
+    },
+}
