@@ -46,7 +46,7 @@ usage: python crypto_pie.py [-h] {encrypt,decrypt} [-p [PATHES ...]] [-d DESTINA
 Encryptor/Decryptor with CLI interface
 
 positional arguments:
-  {encrypt,decrypt}     List of purposes handlers
+  {encrypt,decrypt, generate_key}     List of purposes handlers
     encrypt             Encrypt options
       options:
         -h, --help            show help message
@@ -72,11 +72,17 @@ positional arguments:
         -r, --recursively     Recursively encrypt/decrypt everuthing in input path. Doesnt do anything if file on input
         -v, --verbose         Print results into stdout
         -k KEY, --key KEY     The value by which an input will be encrypted/decrypted
-        -g, --generate_key  Generate random key
         -b [BORDERS ...], --borders [BORDERS ...]
                               Alphabet/alphabets borders in format: a-z A-Z а-я А-Я
         -e {utf-8, ascii, ...}, --encoding {utf-8, ascii, ...}
                               Encoding of texts of input and output files
+    generate_key             Decrypt options
+      options:
+        -h, --help            show help message
+        -l LENGTH_KEY, --length_key LENGTH_KEY     
+                              Specify length of random key
+        -b [BORDERS ...], --borders [BORDERS ...]
+                              Alphabet/alphabets borders in format: a-z A-Z а-я А-Я
   {cesar,substitution, additive_stream}   A cryptographic algorithm for encryption/decryption
     cesar 
       key format:
@@ -87,6 +93,9 @@ positional arguments:
         value_to_be_replaced1:value_to_replace1,value_to_be_replaced2:value_to_replace1,...
         Sequence of pairs of values to be replace and values to replace and values to be replaced by this value
     additive_stream
+      options:
+        -l LENGTH_KEY, --length_key LENGTH_KEY     
+                              Specify length of random key
       key format:
         interval_to_encrypt1:interval1_key1,interval1_key2,interval1_key3,...;interval_to_encrypt2:interval2_key1,interval2_key2,interval2_key3,...;... interval_to_encrypt1 - in format a-z, A-Z; 0 <=interval_key <= length of interval
         Sequence of pairs of intervals to encrypt and sequence of keys for encryption. The length of keys sequence must be greater than 3 or equal to count + 1 of characters if count is lesser than 3. It is best if the length of the keys sequence is equal to the count of characters of the input text 

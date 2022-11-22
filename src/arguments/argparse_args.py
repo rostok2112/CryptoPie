@@ -61,7 +61,7 @@ argparse_args = [
                                             "cesar",
                                         ],
                                         "options" : [
-                                        *(set(general_options) - set([])) 
+                                        *(set(general_options) - set(["length_key",])) 
                                         ],
                                         "childs" : [
                                         
@@ -77,7 +77,7 @@ argparse_args = [
                                             "sybstitution",
                                         ],
                                         "options" : [
-                                            *(set(general_options) - set([]))
+                                            *(set(general_options) - set(["length_key",]))
                                         ],
                                         "childs" : [
                                         
@@ -93,7 +93,7 @@ argparse_args = [
                                             "additive_stream",
                                         ],
                                         "options" : [
-                                            *(set(general_options) - set([]))
+                                            *((set(general_options) | set(["length_key",])) - set([]))
                                         ],
                                         "childs" : [
                                         
@@ -137,7 +137,7 @@ argparse_args = [
                                             "cesar",
                                         ],
                                         "options" : [
-                                            *(set(general_options) - set(["generate_key",]))
+                                            *(set(general_options) - set(["generate_key", "length_key",]))
                                         ],
                                         "childs" : [
                                         
@@ -154,7 +154,7 @@ argparse_args = [
                                             "sybstitution",
                                         ],
                                         "options" : [
-                                            *(set(general_options) - set(["generate_key",]))
+                                            *(set(general_options) - set(["generate_key", "length_key",]))
                                         ],
                                         "childs" : [
                                         
@@ -170,7 +170,84 @@ argparse_args = [
                                             "additive_stream",
                                         ],
                                         "options" : [
-                                            *(set(general_options) - set(["generate_key",]))
+                                            *(set(general_options) - set(["generate_key", "length_key",]))
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        "name" : "generate_key_parser",
+                        "handle_func" : "add_parser",
+                        "kwargs" : {
+                            "help" : "Generate key options",
+                        },
+                        "args" : [
+                            "generate_key",
+                        ],
+                        "options" : [
+
+                        ],
+                        "childs" : [
+                            {
+                                "name" : "methods",
+                                "handle_func" : "add_subparsers",
+                                "kwargs" : {
+                                    "help" : "A cryptographic algorithm for encryption",
+                                    "dest" : "method",
+                                },
+                                "args" : [
+
+                                ],
+                                "childs" : [
+                                    {
+                                        "name" : "cesar_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A Cesar cipher cryptographic algorithm for encryption",
+                                        },
+                                        "args" : [
+                                            "cesar",
+                                        ],
+                                        "options" : [
+                                            "borders",
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
+                                    {
+                                        "name" : "sybstitution_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A substitution cipher cryptographic algorithm for encryption",
+                                        },
+                                        "args" : [
+                                            "sybstitution",
+                                        ],
+                                        "options" : [
+                                            "borders",
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
+                                    {
+                                        "name" : "additive_stream_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "An additive stream cipher cryptographic algorithm for encryption",
+                                        },
+                                        "args" : [
+                                            "additive_stream",
+                                        ],
+                                        "options" : [
+                                            "borders",
+                                            "length_key",
                                         ],
                                         "childs" : [
                                         

@@ -1,7 +1,7 @@
 import random as rnd
 from utils import replace_by_dict, revert_dict
 
-def substitution_encrypt(text: str, key: str, *args) -> str:
+def substitution_encrypt(text: str, key: str, *args, **kwargs) -> str:
     return (
         replace_by_dict(
             text,
@@ -9,7 +9,7 @@ def substitution_encrypt(text: str, key: str, *args) -> str:
         ) 
     )
 
-def substitution_decrypt(text: str, key: str, *args) -> str:
+def substitution_decrypt(text: str, key: str, *args, **kwargs) -> str:
     return (
         replace_by_dict(
             text, 
@@ -17,7 +17,7 @@ def substitution_decrypt(text: str, key: str, *args) -> str:
         ) 
     )
 
-def substitution_generate_key(borders: list[str] = ['a-z', 'A-Z'], *args) -> str:
+def substitution_generate_key(borders: list[str] = ['a-z', 'A-Z'], *args, **kwargs) -> str:
     if len(borders):
         replacement_map = {}
         for edges in (border.split('-') for border in borders):

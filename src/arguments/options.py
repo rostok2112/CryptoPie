@@ -106,11 +106,21 @@ general_options = {
          "kwargs" : {
             "help" : "Generate random key",
             "action" : "store_true",
-
         },
         "args" : [
             "-g",
             "--generate_key",
+        ],
+    },
+    "length_key" : {
+         "kwargs" : {
+            "help" : "Specify key length for random key",
+            "type" : int,
+            "default" : 3,
+        },
+        "args" : [
+            "-l",
+            "--length_key",
         ],
     },
 }

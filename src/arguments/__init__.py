@@ -24,11 +24,11 @@ for obj in argparse_args:
 
 args = parser.parse_args()
 
-if not len(args.input) and not len(args.pathes):
+if args.purpose != "generate_key" and  not len(args.input) and not len(args.pathes):
    parser.error("At least one of input texts or input pathes (--pathes) required")
 
 if args.purpose == "encrypt" and bool(args.key) == bool(args.generate_key): # if not or specified at the same time 
    parser.error("Specify key by -k (--key) key OR set -g (--generate_key) (not at the same time)")
 
-if not args.key and args.purpose == "decrypt":
+if args.purpose == "decrypt" and not args.key:
     parser.error("Specify key by -k (--key) key for decryption")

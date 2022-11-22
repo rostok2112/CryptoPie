@@ -4,8 +4,6 @@ Additive stream cipher with cimplified key
 import random as rnd
 from utils import recognise_letter_borders
 
-KEY_LENGTH = 3
-
 def _generate_gamming_sequence(text: str, key: str):
     interval_keys_dict = {}
     for interval_key_pair in key.split(';'):
@@ -38,7 +36,7 @@ def _generate_gamming_sequence(text: str, key: str):
 
     return intervals_gamming_sequenses
 
-def additive_stream_encrypt(text: str, key: str, borders: list[str] = ['a-z', 'A-Z'], *args):
+def additive_stream_encrypt(text: str, key: str, borders: list[str] = ['a-z', 'A-Z'], *args, **kwargs):
     intervals_gamming_sequenses = _generate_gamming_sequence(text, key)
     edges = [tuple(edges.split('-')) for edges in borders]
     encrypted_characters = []
@@ -68,7 +66,7 @@ def additive_stream_encrypt(text: str, key: str, borders: list[str] = ['a-z', 'A
 
     return "".join(encrypted_characters)
 
-def additive_stream_decrypt(text: str, key: int, borders: list[str] = ['a-z', 'A-Z'], *args) -> str:
+def additive_stream_decrypt(text: str, key: int, borders: list[str] = ['a-z', 'A-Z'], *args, **kwargs) -> str:
     intervals_gamming_sequenses = _generate_gamming_sequence(text, key)
     edges = [tuple(edges.split('-')) for edges in borders]
     decrypted_characters = []
@@ -98,11 +96,11 @@ def additive_stream_decrypt(text: str, key: int, borders: list[str] = ['a-z', 'A
             decrypted_characters.append(char)
     return "".join(decrypted_characters)
 
-def additive_stream_generate_key(borders: list[str] = ['a-z', 'A-Z'], *args) -> str:
+def additive_stream_generate_key(borders: list[str] = ['a-z', 'A-Z'], key_length: int = 3, *args, **kwargs) -> str:
     if len(borders):
         key_parts = []
         for i, edges in enumerate(border.split('-') for border in borders):
             interval_length = ord(edges[1]) - ord(edges[0]) + 1
-            key_parts.append(f"{borders[i]}:{','.join([str(rnd.randint(0, interval_length - 1)) for i_ in range(KEY_LENGTH)])}") 
+            key_parts.append(f"{borders[i]}:{','.join([str(rnd.randint(0, interval_length - 1)) for i_ in range(key_length)])}") 
 
         return ';'.join(key_parts)
