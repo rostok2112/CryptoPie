@@ -41,7 +41,7 @@ pip freeze > requirements.txt
 ```text
 usage: python crypto_pie.py [-h] {encrypt,decrypt} [-p [PATHES ...]] [-d DESTINATION] [-r] [-k KEY] [-b [BORDERS ...]]
                          [-e {utf-8, ascii, ...}]
-                         {cesar,replacement,additive_stream} ... input [input ...]
+                         {ceasar,replacement,additive_stream} ... input [input ...]
 
 Encryptor/Decryptor with CLI interface
 
@@ -83,8 +83,8 @@ positional arguments:
                               Specify length of random key
         -b [BORDERS ...], --borders [BORDERS ...]
                               Alphabet/alphabets borders in format: a-z A-Z а-я А-Я
-  {cesar,substitution, additive_stream}   A cryptographic algorithm for encryption/decryption
-    cesar 
+  {ceasar,substitution, additive_stream}   A cryptographic algorithm for encryption/decryption
+    ceasar 
       key format:
         integer_num,  -inf <= integer_num <= inf
         May be any positive or negative integer

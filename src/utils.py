@@ -69,7 +69,7 @@ def shift_string(string: str, shift: int, borders: list[str] = ['a-z', 'A-Z']) -
             ])
     )
 
-def replace_by_dict(string: str, dict_: dict[str, str]):
+def replace_by_dict(string: str, dict_: dict[str, str]) -> str:
     """
     Replacing everything is given in stringto values of dictionary dict_ by keys 
     ----------
@@ -83,7 +83,7 @@ def replace_by_dict(string: str, dict_: dict[str, str]):
        replaced_chars.append(dict_.get(char, char))
     return ''.join(replaced_chars)
 
-def revert_dict(dict_ : dict[str, str]):
+def revert_dict(dict_ : dict[str, str]) -> dict:
     """
     Swaps keys and values of dictionary dict_  
     ----------
@@ -93,7 +93,7 @@ def revert_dict(dict_ : dict[str, str]):
 
     return dict(map(reversed, dict_.items()))
 
-def replace_by_list(string: str, list_: list[str]):
+def replace_by_list(string: str, list_: list[str]) -> str:
     """
     Replacing everything is given in string to values of list list_ by corresponding index of character in list to character in string
     ----------
@@ -107,3 +107,107 @@ def replace_by_list(string: str, list_: list[str]):
     for i, char in enumerate(string):
        replaced_chars.append(list_index_dict.get(i, char))
     return ''.join(replaced_chars)
+
+def shuffle_by_dict(to_shuffle: list, shuffle_indexes: dict[int, int], add_not_shuffled: bool = False) -> list:
+    """
+    Shuffle list. Replacing value with index is given in key of input dictionary to value with index is given by corresponding value of dictionary
+    ----------
+    Parameters:
+    + to_shuffle - list whose elements will be shuffled 
+    + shuffle_indexes - dictionary by which index is given in key a value of input list will be replaced by corresponding value by index is given in value of this dictionary
+    + add_not_shuffled - boolean value that responsible for adding not affected values to output list
+    """ 
+    output_list = []
+    for i in range(len(to_shuffle)):
+        if not (index_to_replace := shuffle_indexes.get(i, None)):
+            key_list = list(shuffle_indexes.keys())
+            val_list = list(shuffle_indexes.values())
+            try:
+                position = val_list.index(i)
+            except:
+                position = None
+            if position:
+                index_to_replace = shuffle_indexes[i] = key_list[position]               
+        if type(index_to_replace) == int or type(index_to_replace) == tuple or add_not_shuffled:
+            if index_to_replace and type(index_to_replace) != tuple:
+                if index_to_replace > i:
+                    shuffle_indexes[index_to_replace] =  (i, to_shuffle[i])
+                else:
+                    output_list[index_to_replace or i] = to_shuffle[index_to_replace or i]
+            output_list.append(tmp if type(index_to_replace) != tuple and type(tmp := to_shuffle[index_to_replace or i]) != type(None) else index_to_replace[1])
+
+    return output_list
+
+def shuffle_by_list(to_shuffle: list, shuffle_indexes: list[int]) -> list:
+    """
+    Shuffle input list by values of shuffle list
+    ----------
+    Parameters:
+    + to_shuffle - list whose elements will be shuffled 
+    + shuffle_indexes - list with where value by index - is index by which the corresponding value of input list by index will be replaced
+    """ 
+    return [to_shuffle[shuffle_indexes[i]] for i in range(len(shuffle_indexes))]
+
+def rotate(to_rotate: list, rotate_by: int) -> list:
+    """
+    Rotating everything is given in input list by given value
+    ----------
+    Parameters:
+    + to_rotate - list whose elements will be rotated 
+    + rotate_by - value by which every element of input list will be rotated
+    """ 
+    return [to_rotate[(i - rotate_by) % len(to_rotate)] for i in range(len(to_rotate))]
+
+def bits_to_int(bits: list[int]) -> int:
+    """
+    Converting array of bits to integer
+    ----------
+    Parameters:
+    + bits - list of bits to convert
+
+    """
+    out = 0
+    for bit in bits:
+        out = (out << 1) | bit
+    return out
+
+def normalize_byte(byte: list[str]) -> str:
+    """
+    Appending leading zeros bits to str interpetation of byte
+    ----------
+    Parameters:
+    + byte - string to append leading zeros
+
+    """ 
+    if len(byte) < 8: # we need 8 bits in byte
+            for i in range(8 - len(byte)):
+                byte = '0' + byte
+    return byte
+
+def list_chunks(list_ : list, chunk_lenght: int) -> list[list]:
+    """
+    Solit list to list of chunks
+    ----------
+    Parameters:
+    + list_ - list to be splitted
+    + chunk_lenght - size of 1 chunk
+
+    """ 
+    chunk_lenght = max(1, chunk_lenght)
+
+    return [list_[i : i + chunk_lenght] for i in range(0, len(list_), chunk_lenght)]
+
+def split_bits_to_bytes(bits_array: bytes) -> bytes:
+    """
+    Replace in binary string bits sequence to bytes (b'\x01\x00\x01\x01\x01\x01\x01\x00' -> b'\xbe')
+    ----------
+    Parameters:
+    + bits_array - bits sequence to replace
+
+    """ 
+    byte_array= bytes()
+
+    for bits_8 in list_chunks(list(bits_array), 8):
+        byte_array += bytes([bits_to_int(bits_8)])
+
+    return byte_array

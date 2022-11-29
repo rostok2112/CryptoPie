@@ -109,18 +109,17 @@ general_options = {
         },
         "args" : [
             "-g",
-            "--generate_key",
+            "--generate-key",
         ],
     },
     "length_key" : {
          "kwargs" : {
             "help" : "Specify key length for random key",
             "type" : int,
-            "default" : 3,
         },
         "args" : [
             "-l",
-            "--length_key",
+            "--length-key",
         ],
     },
 }

@@ -4,7 +4,11 @@ from arguments.argparse_args import argparse_args
 def traversal(node, parent=None):
     def handle(node_, parent_):
         handle_func = node_.get("handle_func")
-        node__ = globals()[node_.get("name")] = (getattr(parent_, node_.get("handle_func")) if type(handle_func) == type("") else node_.get("handle_func"))(*node_.get("args"), **node_.get("kwargs"))
+        node__ = globals()[node_.get("name")] = (
+            getattr(
+                parent_, node_.get("handle_func")
+            ) if type(handle_func) == str else node_.get("handle_func")
+        )(*node_.get("args"), **node_.get("kwargs"))
         node_["is_handled"] = True
 
         for arg in node_.get("options", []):
@@ -23,6 +27,9 @@ for obj in argparse_args:
     traversal(obj)
 
 args = parser.parse_args()
+
+setattr(args, "method", args.method.replace('-', '_'))
+setattr(args, "purpose", args.purpose.replace('-', '_'))
 
 if args.purpose != "generate_key" and  not len(args.input) and not len(args.pathes):
    parser.error("At least one of input texts or input pathes (--pathes) required")

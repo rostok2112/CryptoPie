@@ -52,13 +52,13 @@ argparse_args = [
                                 ],
                                 "childs" : [
                                     {
-                                        "name" : "cesar_parser",
+                                        "name" : "ceasar_parser",
                                         "handle_func" : "add_parser",
                                         "kwargs" : {
-                                            "help" : "A Cesar cipher cryptographic algorithm for encryption",
+                                            "help" : "A Ceasar cipher cryptographic algorithm for encryption",
                                         },
                                         "args" : [
-                                            "cesar",
+                                            "ceasar",
                                         ],
                                         "options" : [
                                         *(set(general_options) - set(["length_key",])) 
@@ -99,6 +99,22 @@ argparse_args = [
                                         
                                         ],
                                     },
+                                    {
+                                        "name" : "s_des_block_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A simplified data enceryption standart block cipher cryptographic algorithm for encryption",
+                                        },
+                                        "args" : [
+                                            "s-des-block",
+                                        ],
+                                        "options" : [
+                                            *(set(general_options) - set(["length_key", "borders", "verbose"]))
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
                                 ],
                             },
                         ],
@@ -128,13 +144,13 @@ argparse_args = [
                                 ],
                                 "childs" : [
                                     {
-                                        "name" : "cesar_parser",
+                                        "name" : "ceasar_parser",
                                         "handle_func" : "add_parser",
                                         "kwargs" : {
-                                            "help" : "A Cesar cipher cryptographic algorithm for decryption",
+                                            "help" : "A Ceasar cipher cryptographic algorithm for decryption",
                                         },
                                         "args" : [
-                                            "cesar",
+                                            "ceasar",
                                         ],
                                         "options" : [
                                             *(set(general_options) - set(["generate_key", "length_key",]))
@@ -167,10 +183,26 @@ argparse_args = [
                                             "help" : "An additive stream cipher cryptographic algorithm for decryption",
                                         },
                                         "args" : [
-                                            "additive_stream",
+                                            "additive-stream",
                                         ],
                                         "options" : [
                                             *(set(general_options) - set(["generate_key", "length_key",]))
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
+                                    {
+                                        "name" : "s_des_block_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A simplified data enceryption standart block cipher cryptographic algorithm for decryption",
+                                        },
+                                        "args" : [
+                                            "s-des-block",
+                                        ],
+                                        "options" : [
+                                            *(set(general_options) - set(["generate_key", "length_key"]))
                                         ],
                                         "childs" : [
                                         
@@ -205,13 +237,13 @@ argparse_args = [
                                 ],
                                 "childs" : [
                                     {
-                                        "name" : "cesar_parser",
+                                        "name" : "ceasar_parser",
                                         "handle_func" : "add_parser",
                                         "kwargs" : {
-                                            "help" : "A Cesar cipher cryptographic algorithm for encryption",
+                                            "help" : "A Ceasar cipher cryptographic algorithm",
                                         },
                                         "args" : [
-                                            "cesar",
+                                            "ceasar",
                                         ],
                                         "options" : [
                                             "borders",
@@ -224,7 +256,7 @@ argparse_args = [
                                         "name" : "sybstitution_parser",
                                         "handle_func" : "add_parser",
                                         "kwargs" : {
-                                            "help" : "A substitution cipher cryptographic algorithm for encryption",
+                                            "help" : "A substitution cipher cryptographic algorithm",
                                         },
                                         "args" : [
                                             "sybstitution",
@@ -240,14 +272,30 @@ argparse_args = [
                                         "name" : "additive_stream_parser",
                                         "handle_func" : "add_parser",
                                         "kwargs" : {
-                                            "help" : "An additive stream cipher cryptographic algorithm for encryption",
+                                            "help" : "An additive stream cipher cryptographic algorithm",
                                         },
                                         "args" : [
-                                            "additive_stream",
+                                            "additive-stream",
                                         ],
                                         "options" : [
                                             "borders",
                                             "length_key",
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
+                                    {
+                                        "name" : "s_des_block_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A simplified data enceryption standart block cipher cryptographic algorithm",
+                                        },
+                                        "args" : [
+                                            "s-des-block",
+                                        ],
+                                        "options" : [
+
                                         ],
                                         "childs" : [
                                         

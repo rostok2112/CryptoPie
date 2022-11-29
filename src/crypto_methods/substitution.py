@@ -1,3 +1,6 @@
+"""
+Substitution cipher 
+"""
 import random as rnd
 from utils import replace_by_dict, revert_dict
 
@@ -28,3 +31,7 @@ def substitution_generate_key(borders: list[str] = ['a-z', 'A-Z'], *args, **kwar
                     for letter in interval_range
             }
         return ','.join([f"{key}:{value}" for key, value in replacement_map.items()])
+
+substitution_settings = {
+
+}
