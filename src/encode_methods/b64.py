@@ -32,8 +32,10 @@ def b64_decode(text: str, encoding: str, *args, **kwargs) -> str:
         except:
             bits += "000000"
     for byte in list_chunks(bits, 8):
-        decrypted_bytes += bytearray([bits_to_int(list(map(lambda x: int(x), byte)))])
-
+        int_ = bits_to_int(list(map(lambda x: int(x), byte)))
+        if int_: # remove zero bytes
+            decrypted_bytes += bytearray([int_])
+    
     return decrypted_bytes.decode(encoding)
 
 b64_settings = {
