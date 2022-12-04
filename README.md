@@ -1,7 +1,13 @@
-# CryptoPie
-
-Encryptor and decryptor with implemented collection of encryption algorithms and CLI interface
-
+<h1 align="center">
+  CryptoPie
+</h1>
+<h4 align="center">
+  Encryptor, decryptor, encoder and decoder with implemented collection of cryptography and encoding algorithms and CLI interface
+</h4>
+<p align="center">
+  <a href="https://github.com/rostok2112/CryptoPie/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/rostok2112/CryptoPie.svg">
+  </a>
+</p>
 ## Requirements
 
 - Python3
