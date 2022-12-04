@@ -30,6 +30,9 @@ argparse_args = [
                     {
                         "name" : "encrypt_parser",
                         "handle_func" : "add_parser",
+                        "attrs" : {
+                            "module" : "crypto_methods",
+                        },
                         "kwargs" : {
                             "help" : "Encrypt options",
                         },
@@ -77,7 +80,7 @@ argparse_args = [
                                             "sybstitution",
                                         ],
                                         "options" : [
-                                            *(set(general_options) - set(["length_key",]))
+                                            *(set(general_options) - set(["length_key", "borders"]))
                                         ],
                                         "childs" : [
                                         
@@ -138,6 +141,9 @@ argparse_args = [
                     {
                         "name" : "decrypt_parser",
                         "handle_func" : "add_parser",
+                        "attrs" : {
+                            "module" : "crypto_methods",
+                        },
                         "kwargs" : {
                             "help" : "Decrypt options",
                         },
@@ -186,7 +192,7 @@ argparse_args = [
                                             "sybstitution",
                                         ],
                                         "options" : [
-                                            *(set(general_options) - set(["generate_key", "length_key",]))
+                                            *(set(general_options) - set(["generate_key", "borders", "length_key",]))
                                         ],
                                         "childs" : [
                                         
@@ -218,7 +224,7 @@ argparse_args = [
                                             "s-des-block",
                                         ],
                                         "options" : [
-                                            *(set(general_options) - set(["generate_key", "length_key"]))
+                                            *(set(general_options) - set(["generate_key", "length_key", "borders"]))
                                         ],
                                         "childs" : [
                                         
@@ -247,6 +253,9 @@ argparse_args = [
                     {
                         "name" : "generate_key_parser",
                         "handle_func" : "add_parser",
+                        "attrs" : {
+                            "module" : "crypto_methods",
+                        },
                         "kwargs" : {
                             "help" : "Generate key options",
                         },
@@ -344,6 +353,100 @@ argparse_args = [
                                         ],
                                         "options" : [
 
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        "name" : "encode_parser",
+                        "handle_func" : "add_parser",
+                        "attrs" : {
+                            "module" : "encode_methods",
+                        },
+                        "kwargs" : {
+                            "help" : "Encode options",
+                        },
+                        "args" : [
+                            "encode",
+                        ],
+                        "options" : [
+
+                        ],
+                        "childs" : [
+                            {
+                                "name" : "methods",
+                                "handle_func" : "add_subparsers",
+                                "kwargs" : {
+                                    "help" : "An encoding algorithm",
+                                    "dest" : "method",
+                                },
+                                "args" : [
+
+                                ],
+                                "childs" : [
+                                    {
+                                        "name" : "b64_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A Base64 encoding algorithm",
+                                        },
+                                        "args" : [
+                                            "b64",
+                                        ],
+                                        "options" : [
+                                            *(set(general_options) - set(["key", "generate_key", "length_key", "borders"]))
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        "name" : "decode_parser",
+                        "handle_func" : "add_parser",
+                        "attrs" : {
+                            "module" : "encode_methods",
+                        },
+                        "kwargs" : {
+                            "help" : "Decode options",
+                        },
+                        "args" : [
+                            "decode",
+                        ],
+                        "options" : [
+
+                        ],
+                        "childs" : [
+                            {
+                                "name" : "methods",
+                                "handle_func" : "add_subparsers",
+                                "kwargs" : {
+                                    "help" : "A decoding algorithm",
+                                    "dest" : "method",
+                                },
+                                "args" : [
+
+                                ],
+                                "childs" : [
+                                    {
+                                        "name" : "b64_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A Base64 decoding algorithm",
+                                        },
+                                        "args" : [
+                                            "b64",
+                                        ],
+                                        "options" : [
+                                            *(set(general_options) - set(["key", "generate_key", "length_key", "borders"]))
                                         ],
                                         "childs" : [
                                         

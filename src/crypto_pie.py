@@ -1,7 +1,7 @@
 import datetime
 from importlib import import_module
 from pathlib import Path
-from arguments import args
+from arguments import args, attrs
 
 def output_to_stdout(output: str, header: str):
     print(f'{header}:\n"""\n{output}\n"""\n') 
@@ -38,7 +38,7 @@ def process_file(path: Path):
 if args.purpose != "generate_key":
     dest_path = Path(args.destination)
 
-current_method_module = import_module(f"crypto_methods.{args.method}") # get corresponding module to selected algorithm
+current_method_module = import_module(f"{attrs.get(args.purpose).get('module')}.{args.method}") # get corresponding module to selected algorithm
 current_handler = getattr(current_method_module, f"{args.method}_{args.purpose}", None) # get corresponding handling function to selected usage purpose and algorithm
 current_settings = getattr(current_method_module, f"{args.method}_settings", None) # get corresponding object with some settings
 
@@ -50,10 +50,11 @@ current_key = getattr(
 )( # method call
     borders=getattr(args, "borders", None),
     **optional_kwargs_generate_key
-) if getattr(args, "generate_key", args.purpose == "generate_key") else args.key # get key from corresponding to selected method keygen function or get specified key 
+) if getattr(args, "generate_key", args.purpose == "generate_key") else getattr(args, "key", None) # get key from corresponding to selected method keygen function or get specified key 
 
 def main():
-    print(f"Key: {current_key}\n")
+    if current_key:
+        print(f"Key: {current_key}\n")
     if args.purpose != "generate_key":
         dest_path.mkdir(parents=True, exist_ok=True)
         

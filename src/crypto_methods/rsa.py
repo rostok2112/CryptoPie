@@ -1,3 +1,6 @@
+"""
+The RSA asymetric cipher
+"""
 from math import gcd
 import random as rnd
 from utils import get_random_prime, mod_inverse

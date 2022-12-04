@@ -173,15 +173,15 @@ def bits_to_int(bits: list[int]) -> int:
         out = (out << 1) | bit
     return out
 
-def normalize_byte(byte: list[str]) -> str:
+def normalize_byte(byte: list[str], len_: int = 8) -> str:
     """
     Appending leading zeros bits to str interpetation of byte
     ----------
     Parameters:
     + byte - string to append leading zeros
     """ 
-    if len(byte) < 8: # we need 8 bits in byte
-            for i in range(8 - len(byte)):
+    if len(byte) < len_: # we need len_ bits in byte
+            for i in range(len_ - len(byte)):
                 byte = '0' + byte
     return byte
 
@@ -220,8 +220,6 @@ def is_odd(num: int) -> bool:
     """
     return num & 1
 
-
-
 def mod_inverse(a, m):
     if gcd(a, m) != 1:
         return None
@@ -232,8 +230,6 @@ def mod_inverse(a, m):
         q = u3 // v3
         v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
     return u1 % m
-
-
 
 def is_prime(num: int) -> bool:
     """

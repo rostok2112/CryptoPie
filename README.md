@@ -43,10 +43,10 @@ usage: python crypto_pie.py [-h] {encrypt,decrypt} [-p [PATHES ...]] [-d DESTINA
                          [-e {utf-8, ascii, ...}]
                          {ceasar,replacement,additive_stream,s-des-block,rsa} ... input [input ...]
 
-Encryptor/Decryptor with CLI interface
+Encryptor/Decryptor/Encoder/Decoder with CLI interface
 
 positional arguments:
-  {encrypt,decrypt, generate_key}     List of purposes handlers
+  {encrypt,decrypt,generate_key,encode,decode}     List of purposes handlers
     encrypt             Encrypt options
       options:
         -h, --help            show help message
@@ -83,6 +83,8 @@ positional arguments:
                               Specify length of random key
         -b [BORDERS ...], --borders [BORDERS ...]
                               Alphabet/alphabets borders in format: a-z A-Z а-я А-Я
+    encode
+    decode
   {ceasar,substitution,additive_stream,s-des-bloc,rsa}   A cryptographic algorithm for encryption/decryption
     ceasar 
       key format:
@@ -101,6 +103,7 @@ positional arguments:
         Sequence of pairs of intervals to encrypt and sequence of keys for encryption. The length of keys sequence must be greater than 3 or equal to count + 1 of characters if count is lesser than 3. It is best if the length of the keys sequence is equal to the count of characters of the input text
     s-des-block
     rsa
+  {b64,}   An encoding/decoding algorithm 
 options:
         -h, --help            show help message
 ```

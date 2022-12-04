@@ -6,15 +6,16 @@ def traversal(node, parent=None):
         handle_func = node_.get("handle_func")
         node__ = globals()[node_.get("name")] = (
             getattr(
-                parent_, node_.get("handle_func")
-            ) if type(handle_func) == str else node_.get("handle_func")
+                parent_, handle_func
+            ) if type(handle_func) == str else handle_func
         )(*node_.get("args"), **node_.get("kwargs"))
         node_["is_handled"] = True
-
+        
         for arg in node_.get("options", []):
             arg_ = general_options.get(arg)
             node__.add_argument(*arg_["args"], **arg_["kwargs"])
-
+        if node_.get("attrs"):
+            attrs[node_.get("args")[0]] = node_.get("attrs")
     if not node.get("is_handled"):
         handle(node, parent)
 
@@ -22,7 +23,7 @@ def traversal(node, parent=None):
         child_parent = globals().get(node.get("name"))
         handle(child, child_parent)
         traversal(child, child_parent)
-
+attrs = {}
 for obj in argparse_args: 
     traversal(obj)
 
@@ -35,7 +36,6 @@ if not getattr(args, "method", False):
 
 setattr(args, "purpose", args.purpose.replace('-', '_').lower())
 setattr(args, "method", args.method.replace('-', '_').lower())
-
 
 if args.purpose != "generate_key" and  not len(args.input) and not len(args.pathes):
    parser.error("At least one of input texts or input pathes (--pathes) required")
