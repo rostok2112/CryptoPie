@@ -8,6 +8,7 @@
   <a href="https://github.com/rostok2112/CryptoPie/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/rostok2112/CryptoPie.svg">
   </a>
 </p>
+
 ## Requirements
 
 - Python3
