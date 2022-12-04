@@ -1,3 +1,6 @@
+import random as rnd
+from math import sqrt, gcd
+
 def recognise_letter_borders(
     letter: str, 
     borders: list[tuple[str, str]] = [('a', 'z'), ('A', 'Z')]
@@ -164,7 +167,6 @@ def bits_to_int(bits: list[int]) -> int:
     ----------
     Parameters:
     + bits - list of bits to convert
-
     """
     out = 0
     for bit in bits:
@@ -177,7 +179,6 @@ def normalize_byte(byte: list[str]) -> str:
     ----------
     Parameters:
     + byte - string to append leading zeros
-
     """ 
     if len(byte) < 8: # we need 8 bits in byte
             for i in range(8 - len(byte)):
@@ -191,7 +192,6 @@ def list_chunks(list_ : list, chunk_lenght: int) -> list[list]:
     Parameters:
     + list_ - list to be splitted
     + chunk_lenght - size of 1 chunk
-
     """ 
     chunk_lenght = max(1, chunk_lenght)
 
@@ -203,11 +203,82 @@ def split_bits_to_bytes(bits_array: bytes) -> bytes:
     ----------
     Parameters:
     + bits_array - bits sequence to replace
-
     """ 
-    byte_array= bytes()
+    byte_array = bytes()
 
     for bits_8 in list_chunks(list(bits_array), 8):
         byte_array += bytes([bits_to_int(bits_8)])
 
     return byte_array
+
+def is_odd(num: int) -> bool:
+    """
+    Check if specified number is odd
+    ----------
+    Parameters:
+    + num -  a number to check is odd 
+    """
+    return num & 1
+
+
+
+def mod_inverse(a, m):
+    if gcd(a, m) != 1:
+        return None
+    u1, u2, u3 = 1, 0, a
+    v1, v2, v3 = 0, 1, m
+   
+    while v3 != 0:
+        q = u3 // v3
+        v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
+    return u1 % m
+
+
+
+def is_prime(num: int) -> bool:
+    """
+    Wheel factorization algorithm
+    """
+    # TODO: replace sieve algorithm by any faster modern algorithm for finding prime number
+    if not is_odd(num):
+        return False
+
+    # The Wheel for checking
+    # prime number
+    arr = [7, 11, 13, 17, 19, 23, 29, 31]
+
+    # Base Case
+    if (num < 2) :
+        return False
+     
+    # Check for the number taken
+    # as basis
+    if (
+        num % 2 == 0
+        or num % 3 == 0 
+        or num % 5 == 0
+    ):
+        return False
+     
+    for i in range(0,int(sqrt(num)), 30):
+        for spoke in  arr:
+            if spoke > int(sqrt(num)):
+                break
+            # Check if num is a multiple
+            # of prime number in the
+            # wheel
+            elif num % (spoke + i) == 0:
+                return False
+    return True
+
+def get_random_prime(bit_length: int) -> int:
+    """
+    Returns prime number with specified length
+    ----------
+    Parameters:
+    + bit_length -  binary length of prime number
+    """ 
+    while True:
+        num = rnd.getrandbits(bit_length)
+        if is_prime(num):
+            return num

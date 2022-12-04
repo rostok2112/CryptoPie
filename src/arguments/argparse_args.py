@@ -115,6 +115,22 @@ argparse_args = [
                                         
                                         ],
                                     },
+                                    {
+                                        "name" : "rsa_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A RSA asymetric cipher cryptographic algorithm",
+                                        },
+                                        "args" : [
+                                            "rsa",
+                                        ],
+                                        "options" : [
+                                            *(set(general_options) - set(["length_key", "borders", "verbose"]))
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
                                 ],
                             },
                         ],
@@ -208,6 +224,22 @@ argparse_args = [
                                         
                                         ],
                                     },
+                                    {
+                                        "name" : "rsa_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A RSA asymetric cipher cryptographic algorithm",
+                                        },
+                                        "args" : [
+                                            "rsa",
+                                        ],
+                                        "options" : [
+                                            *(set(general_options) - set(["generate_key", "length_key"]))
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
                                 ],
                             },
                         ],
@@ -293,6 +325,22 @@ argparse_args = [
                                         },
                                         "args" : [
                                             "s-des-block",
+                                        ],
+                                        "options" : [
+
+                                        ],
+                                        "childs" : [
+                                        
+                                        ],
+                                    },
+                                    {
+                                        "name" : "rsa_parser",
+                                        "handle_func" : "add_parser",
+                                        "kwargs" : {
+                                            "help" : "A RSA asymetric cipher cryptographic algorithm",
+                                        },
+                                        "args" : [
+                                            "rsa",
                                         ],
                                         "options" : [
 

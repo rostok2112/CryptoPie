@@ -66,7 +66,7 @@ def s_des_block_encrypt(text: str, key: str, encoding: str, *args, **kwargs) -> 
     k1, k2 = _generate_round_subkeys(key)
     encrypted_bytes = bytearray() 
     
-    for byte in bytearray(text.encode(encoding)):
+    for byte in bytearray(text, encoding):
         byte = bin(byte)[2:] # get bits array without 0b
         byte = normalize_byte(byte)
 

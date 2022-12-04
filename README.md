@@ -41,7 +41,7 @@ pip freeze > requirements.txt
 ```text
 usage: python crypto_pie.py [-h] {encrypt,decrypt} [-p [PATHES ...]] [-d DESTINATION] [-r] [-k KEY] [-b [BORDERS ...]]
                          [-e {utf-8, ascii, ...}]
-                         {ceasar,replacement,additive_stream} ... input [input ...]
+                         {ceasar,replacement,additive_stream,s-des-block,rsa} ... input [input ...]
 
 Encryptor/Decryptor with CLI interface
 
@@ -83,7 +83,7 @@ positional arguments:
                               Specify length of random key
         -b [BORDERS ...], --borders [BORDERS ...]
                               Alphabet/alphabets borders in format: a-z A-Z а-я А-Я
-  {ceasar,substitution, additive_stream}   A cryptographic algorithm for encryption/decryption
+  {ceasar,substitution,additive_stream,s-des-bloc,rsa}   A cryptographic algorithm for encryption/decryption
     ceasar 
       key format:
         integer_num,  -inf <= integer_num <= inf
@@ -98,7 +98,9 @@ positional arguments:
                               Specify length of random key
       key format:
         interval_to_encrypt1:interval1_key1,interval1_key2,interval1_key3,...;interval_to_encrypt2:interval2_key1,interval2_key2,interval2_key3,...;... interval_to_encrypt1 - in format a-z, A-Z; 0 <=interval_key <= length of interval
-        Sequence of pairs of intervals to encrypt and sequence of keys for encryption. The length of keys sequence must be greater than 3 or equal to count + 1 of characters if count is lesser than 3. It is best if the length of the keys sequence is equal to the count of characters of the input text 
+        Sequence of pairs of intervals to encrypt and sequence of keys for encryption. The length of keys sequence must be greater than 3 or equal to count + 1 of characters if count is lesser than 3. It is best if the length of the keys sequence is equal to the count of characters of the input text
+    s-des-block
+    rsa
 options:
         -h, --help            show help message
 ```
@@ -107,11 +109,11 @@ Use by:
 
 ```bash
 cd src/
-python crypto_pie.py [options] <input>
+python crypto_pie.py [purpose] [method] [options] <input>
 ```
 
 Or if pipenv installed:
 
 ```bash
-pipenv run crypto_pie [options] <input>
+pipenv run crypto_pie [purpose] [method] [options] <input>
 ```

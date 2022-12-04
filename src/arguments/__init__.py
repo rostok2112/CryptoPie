@@ -28,8 +28,14 @@ for obj in argparse_args:
 
 args = parser.parse_args()
 
-setattr(args, "method", args.method.replace('-', '_'))
-setattr(args, "purpose", args.purpose.replace('-', '_'))
+if not getattr(args, "purpose", False):
+    parser.error("Specify a purpose of use")
+if not getattr(args, "method", False):
+    parser.error("Specify an algorithm")
+
+setattr(args, "purpose", args.purpose.replace('-', '_').lower())
+setattr(args, "method", args.method.replace('-', '_').lower())
+
 
 if args.purpose != "generate_key" and  not len(args.input) and not len(args.pathes):
    parser.error("At least one of input texts or input pathes (--pathes) required")
