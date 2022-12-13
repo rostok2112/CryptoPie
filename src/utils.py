@@ -278,3 +278,48 @@ def get_random_prime(bit_length: int) -> int:
         num = rnd.getrandbits(bit_length)
         if is_prime(num):
             return num
+
+def get_first_primitive_root(prime_num: int) -> int:
+    """
+    Returns primitive root modulo prime number prime_num 
+    ----------
+    Parameters:
+    + prime_num -  prime number
+    """ 
+    phi_n = prime_num - 1
+
+    possibly_primitive_root = 2
+    while True:
+        try:
+            while possibly_primitive_root < prime_num:
+                if (possibly_primitive_root ** phi_n) % prime_num == 1: 
+                    break
+                possibly_primitive_root += 1
+            l = 1
+            while l < phi_n:
+                if (possibly_primitive_root ** l) % prime_num == 1:
+                    raise
+                l += 1
+            return possibly_primitive_root
+        except:  
+            possibly_primitive_root += 1
+ 
+def is_primitive_root(prime_num: int, primitive_root: int) -> bool:
+    """
+    Check if specified primitive_root is primitive root modulo of prime number prime_num
+    ----------
+    Parameters:
+    + prime_num -  prime number
+    + primitive_root -  possible primitive root modulo of prime number prime_num
+    """ 
+    phi_n = prime_num - 1
+
+    if (primitive_root ** phi_n) % prime_num != 1: 
+        return False
+    l = 1
+    while l < phi_n:
+        if (primitive_root ** l) % prime_num == 1:
+            return False
+        l += 1
+
+    return True

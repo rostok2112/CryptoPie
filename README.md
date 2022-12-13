@@ -45,6 +45,8 @@ pip freeze > requirements.txt
 
 ## Usage
 
+### CryptoPie
+
 ```text
 usage: python crypto_pie.py [-h] {encrypt,decrypt} [-p [PATHES ...]] [-d DESTINATION] [-r] [-k KEY] [-b [BORDERS ...]]
                          [-e {utf-8, ascii, ...}]
@@ -91,7 +93,24 @@ positional arguments:
         -b [BORDERS ...], --borders [BORDERS ...]
                               Alphabet/alphabets borders in format: a-z A-Z а-я А-Я
     encode
+      options:
+        -e {utf-8, ascii, ...}, --encoding {utf-8, ascii, ...}
+        -p [PATHES ...], --pathes [PATHES ...]
+                        A path/pathes to a input file/files/directory/directories
+        -r, --recursively     Recursively encrypt/decrypt everuthing in input path. Doesnt do anything if file on input
+        -d DESTINATION, --destination DESTINATION, --dest DESTINATION
+                        Destination path
+        -h, --help  show this help message and exit
     decode
+      options:
+        -e {utf-8, ascii, ...}, --encoding {utf-8, ascii, ...}
+        -p [PATHES ...], --pathes [PATHES ...]
+                        A path/pathes to a input file/files/directory/directories
+        -r, --recursively     Recursively encrypt/decrypt everuthing in input path. Doesnt do anything if file on input
+        -d DESTINATION, --destination DESTINATION, --dest DESTINATION
+                        Destination path
+        -v, --verbose         Print results into stdout
+        -h, --help  show this help message and exit
   {ceasar,substitution,additive_stream,s-des-bloc,rsa}   A cryptographic algorithm for encryption/decryption
     ceasar 
       key format:
@@ -126,4 +145,57 @@ Or if pipenv installed:
 
 ```bash
 pipenv run crypto_pie [purpose] [method] [options] <input>
+```
+
+### Diffie Hellman algorithm
+
+```text
+usage: python diffie_hellman.py [-h] {get-public-key,get-joint-key} ...
+
+Diffie Hellman protocol
+
+positional arguments:
+  {get-public-key,get-joint-key}
+                        Generate public key or generate joint key
+    get-public-key      Generate public key of this user by given/generated public prime number, public primitive root of this prime number and privite key of this user
+      options:
+        -h, --help            show this help message and exit
+        -gp, --generate-prime-number
+                              Generate random public prime number
+        -gr, --generate-primitive-root
+                              Generate first public primitive root for given/generated prime number
+        -gk, --generate-privite-key
+                              Generate privite key
+        -p PRIME_NUMBER, --prime-number PRIME_NUMBER
+                              Public prime number
+        -r PRIMITIVE_ROOT, --primitive-root PRIMITIVE_ROOT
+                              Public primitive root for given prime number
+        -k PRIVITE_KEY, --privite-key PRIVITE_KEY
+                              Privite key (1 <= privite_key <= given prime number - 1)
+    get-joint-key       Get joint with other user key by public key of other user, public prime number and privite key of this user
+      options:
+        -h, --help            show this help message and exit
+        -p PRIME_NUMBER, --prime-number PRIME_NUMBER
+                              Public prime number
+        -pvk PRIVITE_KEY, --privite-key PRIVITE_KEY
+                              Privite key of this user
+        -pbk PUBLIC_KEY, --public-key PUBLIC_KEY
+                              Public key of other user
+
+options:
+  -h, --help            show this help message and exit
+
+```
+
+Use by:
+
+```bash
+cd src/
+python diffie_hellman.py [purpose] [options]
+```
+
+Or if pipenv installed:
+
+```bash
+pipenv run diffie_hellman [purpose] [options] 
 ```

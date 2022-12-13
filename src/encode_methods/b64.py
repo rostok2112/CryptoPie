@@ -10,7 +10,6 @@ def b64_encode(text: str, encoding: str, *args, **kwargs) -> str:
     encrypted_text = ""
 
     bytes_ = [normalize_byte(bin(byte)[2:]) for byte in bytearray(text, encoding)] # list with chunks divided by 8 bits
-    
     while len(bytes_) % 3: # append zero bytes for dividing by 6 
         bytes_.append("00000000")
 
@@ -25,6 +24,7 @@ def b64_encode(text: str, encoding: str, *args, **kwargs) -> str:
 
 def b64_decode(text: str, encoding: str, *args, **kwargs) -> str:
     decrypted_bytes = bytearray()
+    
     bits = "" 
     for char in text: # get flat bit sequence
         try:
@@ -35,7 +35,7 @@ def b64_decode(text: str, encoding: str, *args, **kwargs) -> str:
         int_ = bits_to_int(list(map(lambda x: int(x), byte)))
         if int_: # remove zero bytes
             decrypted_bytes += bytearray([int_])
-    
+
     return decrypted_bytes.decode(encoding)
 
 b64_settings = {
